@@ -1,13 +1,22 @@
 {
   "name": "discord_bot",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "./prod/index.js",
   "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "start": "node -r dotenv/config ./prod/index.js"
+  },
   "dependencies": {
+    "@discordjs/builders": "^1.4.0",
+    "@discordjs/rest": "^1.5.0",
+    "discord-api-types": "^0.37.26",
     "discord.js": "^14.7.1",
-    "dotenv": "^16.0.3"
+    "dotenv": "^16.0.3",
+    "mongoose": "^6.8.3"
   },
   "devDependencies": {
+    "@types/node": "^18.11.18",
     "eslint": "^8.31.0"
   }
 }
