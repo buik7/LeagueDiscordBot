@@ -6,7 +6,7 @@ import {
   DISCORD_BOT_GUILD_ID,
   DISCORD_BOT_TOKEN,
 } from "../config/secrets";
-import DiscordCommand from "../types/discord/Command";
+import DiscordCommand from "../types/Command";
 import { readAllFilesInDirectory } from "../utils/readFiles";
 
 class CommandHandler extends Collection<string, DiscordCommand> {

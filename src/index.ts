@@ -1,3 +1,3 @@
-import DiscordClient from "./client";
+import DiscordClient from "./discord/client";
 
 new DiscordClient();

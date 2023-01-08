@@ -1,5 +1,5 @@
 import { Interaction } from "discord.js";
-import DiscordEvent from "../types/discord/Event";
+import DiscordEvent from "../types/Event";
 
 class InteractionCreateEvent extends DiscordEvent {
   name = "interactionCreate";

@@ -1,4 +1,4 @@
-import DiscordClient from "../../client";
+import DiscordClient from "../client";
 
 abstract class DiscordEvent {
   readonly client: DiscordClient;

@@ -1,5 +1,5 @@
 import { CommandInteraction, SlashCommandBuilder } from "discord.js";
-import DiscordClient from "../../client";
+import DiscordClient from "../client";
 
 abstract class DiscordCommand {
   readonly client: DiscordClient;

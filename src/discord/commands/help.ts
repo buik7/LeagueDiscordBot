@@ -1,6 +1,6 @@
 import { EmbedBuilder } from "@discordjs/builders";
 import { CommandInteraction, SlashCommandBuilder } from "discord.js";
-import DiscordCommand from "../types/discord/Command";
+import DiscordCommand from "../types/Command";
 
 class HelpCommand extends DiscordCommand {
   data = new SlashCommandBuilder()

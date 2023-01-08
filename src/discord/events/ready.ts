@@ -1,5 +1,5 @@
 import { ActivityType } from "discord.js";
-import DiscordEvent from "../types/discord/Event";
+import DiscordEvent from "../types/Event";
 
 class ReadyEvent extends DiscordEvent {
   name = "ready";

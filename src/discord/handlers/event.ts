@@ -1,7 +1,7 @@
 import { Collection } from "discord.js";
 import path from "path";
 import DiscordClient from "../client";
-import DiscordEvent from "../types/discord/Event";
+import DiscordEvent from "../types/Event";
 import { readAllFilesInDirectory } from "../utils/readFiles";
 
 class EventHandler extends Collection<string, DiscordEvent> {
