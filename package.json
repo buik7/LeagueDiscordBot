@@ -1,5 +1,5 @@
 {
-  "name": "discord_bot",
+  "name": "urbot",
   "version": "1.0.0",
   "main": "./prod/index.js",
   "license": "MIT",
