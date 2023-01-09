@@ -1,9 +1,11 @@
+import { GameModes, GameTypes } from "../constants";
+
 export type CurrentGameInfo = {
   /** The ID of the game */
   gameId: number;
 
   /** The game type */
-  gameType: string;
+  gameType: GameTypes;
 
   /** The game start time represented in epoch milliseconds */
   gameStartTime: number;
@@ -18,12 +20,12 @@ export type CurrentGameInfo = {
   platformId: string;
 
   /** The game mode */
-  gameMode: string;
+  gameMode: GameModes;
 
   /** Banned champion information */
   bannedChampions: BannedChampion[];
 
-  /** The queue type (queue types are documented on the Game Constants page) */
+  /** The queue type. Reference: https://static.developer.riotgames.com/docs/lol/queues.json */
   gameQueueConfigId: number;
 
   /** The observer information */
