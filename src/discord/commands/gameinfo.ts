@@ -1,13 +1,14 @@
+import { EmbedBuilder } from "@discordjs/builders";
 import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
 import { getGameById } from "../../database/dtos/game/controller";
-import { findOneOrCreateDbUser } from "../../database/dtos/user/controller";
+import { findDbUserById } from "../../database/dtos/user/controller";
 import DiscordCommand from "../types/Command";
 import { msToTime } from "../utils/date";
 
-class DailyCommand extends DiscordCommand {
+class GameInfoCommand extends DiscordCommand {
   data = new SlashCommandBuilder()
-    .setName("daily")
-    .setDescription("Get your daily gold once every 6 hours.");
+    .setName("gameinfo")
+    .setDescription("View your account's balance, points and daily cooldown");
 
   async execute(interaction: ChatInputCommandInteraction) {
     const _id = {
@@ -15,16 +16,10 @@ class DailyCommand extends DiscordCommand {
       discordGuildId: interaction.guild!.id,
     };
 
-    const result = await findOneOrCreateDbUser(_id, interaction.user.tag);
-    if (!result || !result.user) {
-      await this.displayError(interaction);
-      return;
-    }
-
-    const { user, created } = result;
-    if (created) {
+    const user = await findDbUserById(_id);
+    if (!user) {
       await interaction.reply(
-        "Your new account was created with an initial balance of 30!"
+        "You don't have an account yet. Please use **`/daily`** to create an account."
       );
       return;
     }
@@ -36,22 +31,34 @@ class DailyCommand extends DiscordCommand {
     }
 
     const now = new Date();
+    let dailyCD = "None";
     if (userGame.dailyCooldown > now) {
       const waitingTime = userGame.dailyCooldown.getTime() - now.getTime();
       const { h, m, s } = msToTime(waitingTime);
-      await interaction.reply(
-        `You must wait **${h} hours, ${m} minutes and ${s} seconds** for your next daily`
-      );
-      return;
+      dailyCD = `${h} hours, ${m} minutes and ${s} seconds`;
     }
 
-    const newDailyCooldown = now.getTime() + 1000 * 60 * 60 * 6; // next 6 hours
-    userGame.balance += 30;
-    userGame.dailyCooldown = new Date(newDailyCooldown);
-    await userGame.save();
-    await interaction.reply(
-      `30 gold was added to your account. New balance: ${userGame.balance.toLocaleString()}`
-    );
+    const embed = new EmbedBuilder()
+      .setTitle(`${interaction.user.username}'s profile`)
+      .setColor(0x1abc9c)
+      .addFields(
+        {
+          name: "Balance",
+          value: userGame.balance.toLocaleString(),
+          inline: true,
+        },
+        {
+          name: "Points",
+          value: userGame.points.toLocaleString(),
+          inline: true,
+        },
+        {
+          name: "Daily cooldown",
+          value: dailyCD,
+        }
+      );
+
+    await interaction.reply({ embeds: [embed] });
   }
 
   private async displayError(interaction: ChatInputCommandInteraction) {
@@ -63,4 +70,4 @@ class DailyCommand extends DiscordCommand {
   }
 }
 
-export default DailyCommand;
+export default GameInfoCommand;

@@ -27,6 +27,13 @@ export const createDbUser = async (
   }
 };
 
+export const findDbUserById = async (
+  _id: DbUserId
+): Promise<DbUserDocument | undefined> => {
+  const user = await User.findById(_id);
+  return user ? user : undefined;
+};
+
 export const findOneOrCreateDbUser = async (
   _id: DbUserId,
   discordUserTag: string

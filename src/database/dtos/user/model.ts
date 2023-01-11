@@ -11,7 +11,6 @@ const UserSchema = new mongoose.Schema<DbUser>({
       type: String,
       required: true,
     },
-    required: true,
   },
   tag: {
     type: String,
