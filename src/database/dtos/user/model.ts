@@ -3,7 +3,14 @@ import { DbUser } from "./type";
 
 const UserSchema = new mongoose.Schema<DbUser>({
   _id: {
-    type: String,
+    discordUserId: {
+      type: String,
+      required: true,
+    },
+    discordGuildId: {
+      type: String,
+      required: true,
+    },
     required: true,
   },
   tag: {

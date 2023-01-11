@@ -7,3 +7,4 @@ export * from "./spectator";
 export * from "./spectator";
 export * from "./summoner";
 export * from "./tft-league";
+export * from "./tft-champion";
