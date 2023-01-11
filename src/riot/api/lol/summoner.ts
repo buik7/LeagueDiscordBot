@@ -30,4 +30,8 @@ export class SummonerApi extends BaseApiLol {
       params
     );
   }
+
+  public getProfileIconURL(profileIconId: string): string {
+    return `https://raw.communitydragon.org/pbe/plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/${profileIconId}.jpg`;
+  }
 }

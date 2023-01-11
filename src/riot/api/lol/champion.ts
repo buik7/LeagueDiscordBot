@@ -66,4 +66,25 @@ export class ChampionApi extends BaseApiLol {
       queryParams
     );
   }
+
+  public getMasteryDiscordIcon(championLevel: number): string {
+    switch (championLevel) {
+      case 1:
+        return "<:mastery1:1062478728829083689>";
+      case 2:
+        return "<:mastery2:1062478746243837982>";
+      case 3:
+        return "<:mastery3:1062479004470349834>";
+      case 4:
+        return "<:mastery4:1062479015165829181>";
+      case 5:
+        return "<:mastery5:1062479025332814014>";
+      case 6:
+        return "<:mastery6:1062479035990552706>";
+      case 7:
+        return "<:mastery7:1062479045763276890>";
+      default:
+        return "<:mastery1:1062478728829083689>";
+    }
+  }
 }
