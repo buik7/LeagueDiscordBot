@@ -73,31 +73,19 @@ export const updateUserBalance = async (
   }
 };
 
-export const populateUserGame = async (
-  user: DbUserDocument
-): Promise<GamePopulatedDbUserDocument> => {
-  return await user.populate<{ gameId: DbGame }>("gameId");
-};
-
-/**
- * Extract `top` users with highest in specified discord guild. \
- * Users are returned in descending order of game balance
+/** \
+ * Return all guild users in descending order of game balance
  * @param discordGuildId
- * @param top positive integer (default to 5 if not specified or `top <= 0`)
  */
 export const rankGuildUserByBalance = async (
-  discordGuildId: string,
-  top: number = 5
+  discordGuildId: string
 ): Promise<GamePopulatedDbUserDocument[] | undefined> => {
   try {
-    if (top <= 0) top = 5;
     const users = await User.find({
       "_id.discordGuildId": discordGuildId,
-    })
-      .populate<{ gameId: DbGame }>("gameId")
-      .sort({ "gameId.balance": -1 })
-      .limit(top);
-    if (!users) throw new Error("Failed to retrieve users");
+    }).populate<{ gameId: DbGame }>("gameId");
+
+    users.sort((a, b) => b.gameId.balance - a.gameId.balance);
     return users;
   } catch (error) {
     console.error(error);
@@ -105,25 +93,18 @@ export const rankGuildUserByBalance = async (
 };
 
 /**
- * Extract `top` users with highest in specified discord guild. \
- * Users are returned in descending order of game points
+ * Return all guild users in descending order of game points
  * @param discordGuildId
- * @param top positive integer (default to 5 if not specified or `top <= 0`)
  */
 export const rankGuildUserByPoints = async (
-  discordGuildId: string,
-  top: number = 5
+  discordGuildId: string
 ): Promise<GamePopulatedDbUserDocument[] | undefined> => {
   try {
-    if (top <= 0) top = 5;
     const users = await User.find({
       "_id.discordGuildId": discordGuildId,
-    })
-      .populate<{ gameId: DbGame }>("gameId")
-      .sort({ "gameId.points": -1 })
-      .limit(top);
+    }).populate<{ gameId: DbGame }>("gameId");
 
-    if (!users) throw new Error("Failed to retrieve users");
+    users.sort((a, b) => b.gameId.points - a.gameId.points);
     return users;
   } catch (error) {
     console.error(error);

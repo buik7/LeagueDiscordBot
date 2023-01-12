@@ -1,6 +1,7 @@
 import { HydratedDocument, Types } from "mongoose";
 
 export interface DbGame {
+  _id: Types.ObjectId;
   balance: number;
   points: number;
   dailyCooldown: Date;

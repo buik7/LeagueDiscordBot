@@ -4,15 +4,9 @@ import { DbInventory } from "./type";
 const InventoryChampionType = {
   name: {
     type: String,
-    required: true,
-  },
-  count: {
-    type: Number,
-    required: true,
   },
   cost: {
     type: Number,
-    required: true,
   },
   icon: {
     type: String,
@@ -31,7 +25,12 @@ const InventoryChampionType = {
 };
 
 const InventorySchema = new mongoose.Schema<DbInventory>({
-  champions: [InventoryChampionType],
+  champions: [
+    {
+      champion: InventoryChampionType,
+      count: Number,
+    },
+  ],
   mainChampion: InventoryChampionType,
 });
 

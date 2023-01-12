@@ -1,6 +1,6 @@
 import { EmbedBuilder } from "@discordjs/builders";
 import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
-import { getGameById } from "../../database/dtos/game/controller";
+import { findGameById } from "../../database/dtos/game/controller";
 import { findDbUserById } from "../../database/dtos/user/controller";
 import DiscordCommand from "../types/Command";
 import { msToTime } from "../utils/date";
@@ -24,7 +24,7 @@ class GameInfoCommand extends DiscordCommand {
       return;
     }
 
-    const userGame = await getGameById(user.gameId);
+    const userGame = await findGameById(user.gameId);
     if (!userGame) {
       await this.displayError(interaction);
       return;

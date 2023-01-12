@@ -1,6 +1,7 @@
-interface DbInventoryChampion {
+import { HydratedDocument, Types } from "mongoose";
+
+export interface DbInventoryChampion {
   name: string;
-  count: number;
   icon: string;
   cost: number;
   stats: {
@@ -17,7 +18,12 @@ interface DbInventoryChampion {
 }
 
 export interface DbInventory {
-  _id: string;
-  champions: DbInventoryChampion[];
+  _id: Types.ObjectId;
+  champions: {
+    champion: DbInventoryChampion;
+    count: number;
+  }[];
   mainChampion: DbInventoryChampion;
 }
+
+export type DbInventoryDocument = HydratedDocument<DbInventory>;

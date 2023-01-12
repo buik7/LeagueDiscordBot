@@ -18,7 +18,7 @@ export const createDbGame = async (
   }
 };
 
-export const getGameById = async (
+export const findGameById = async (
   _id: Types.ObjectId
 ): Promise<DbGameDocument | undefined> => {
   try {

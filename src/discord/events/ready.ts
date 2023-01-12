@@ -11,7 +11,7 @@ class ReadyEvent extends DiscordEvent {
       status: "online",
       activities: [
         {
-          name: "League of Legends",
+          name: "/roll",
           type: ActivityType.Playing,
         },
       ],

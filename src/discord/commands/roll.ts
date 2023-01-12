@@ -1,6 +1,6 @@
 import { EmbedBuilder } from "@discordjs/builders";
 import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
-import { getGameById } from "../../database/dtos/game/controller";
+import { findGameById } from "../../database/dtos/game/controller";
 import { findOneOrCreateDbUser } from "../../database/dtos/user/controller";
 import ChampionTftApi from "../../riot/api/tft/champion";
 import DiscordCommand from "../types/Command";
@@ -35,7 +35,7 @@ class RollCommand extends DiscordCommand {
       ? "Your new account was created with an initial balance of 30!"
       : "";
 
-    const userGame = await getGameById(user.gameId);
+    const userGame = await findGameById(user.gameId);
     if (!userGame) {
       await this.displayError(interaction);
       return;

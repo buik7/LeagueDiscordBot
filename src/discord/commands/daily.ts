@@ -1,5 +1,5 @@
 import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
-import { getGameById } from "../../database/dtos/game/controller";
+import { findGameById } from "../../database/dtos/game/controller";
 import { findOneOrCreateDbUser } from "../../database/dtos/user/controller";
 import DiscordCommand from "../types/Command";
 import { msToTime } from "../utils/date";
@@ -29,7 +29,7 @@ class DailyCommand extends DiscordCommand {
       return;
     }
 
-    const userGame = await getGameById(user.gameId);
+    const userGame = await findGameById(user.gameId);
     if (!userGame) {
       await this.displayError(interaction);
       return;
