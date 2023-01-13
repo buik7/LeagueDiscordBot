@@ -79,17 +79,17 @@ export const lolEndpoints: IEndpoints = {
 
   /* https://developer.riotgames.com/apis#summoner-v4/ */
   SummonerByName: {
-    path: "/summoners/by-name/$(summonerName)",
+    path: "summoners/by-name/$(summonerName)",
     prefix: "summoner",
     version: 4,
   },
   SummonerByPUUID: {
-    path: "/summoners/by-puuid/$(encryptedPUUID)",
+    path: "summoners/by-puuid/$(encryptedPUUID)",
     prefix: "summoner",
     version: 4,
   },
   SummonerByEncryptedSummonerID: {
-    path: "/summoners/$(encryptedSummonerId)",
+    path: "summoners/$(encryptedSummonerId)",
     prefix: "summoner",
     version: 4,
   },

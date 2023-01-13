@@ -1,3 +1,4 @@
+import { Types } from "mongoose";
 import RiotInfo from "./model";
 import { DbRiotInfo, DbRiotInfoDocument } from "./type";
 
@@ -8,6 +9,16 @@ export const createRiotInfo = async (
     const riotInfo = new RiotInfo(dbRiotInfo);
     await riotInfo.save();
     return riotInfo;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const findRiotInfoById = async (
+  _id: Types.ObjectId
+): Promise<DbRiotInfoDocument | undefined> => {
+  try {
+    return (await RiotInfo.findById(_id)) || undefined;
   } catch (error) {
     console.error(error);
   }

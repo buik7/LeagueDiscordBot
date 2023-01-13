@@ -25,6 +25,20 @@ class ChampionTftApi {
     return 0x0099ff;
   }
 
+  public static getChampionStar(count: number) {
+    if (count >= 9) return 3;
+    if (count >= 3) return 2;
+    return 1;
+  }
+
+  public static getPhysicalDamageReduction = (armor: number) => {
+    return Math.floor((100 * armor) / (100 + armor));
+  };
+
+  public static getMagicDamageReduction = (magicResist: number) => {
+    return Math.floor((100 * magicResist) / (100 + magicResist));
+  };
+
   private static getRandomElementFromArray<T>(array: T[]): T {
     const index = Math.floor(Math.random() * array.length);
     return array[index];

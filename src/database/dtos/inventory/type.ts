@@ -17,13 +17,17 @@ export interface DbInventoryChampion {
   };
 }
 
+export interface DbInventoryMainChampion extends DbInventoryChampion {
+  star: number;
+}
+
 export interface DbInventory {
   _id: Types.ObjectId;
   champions: {
     champion: DbInventoryChampion;
     count: number;
   }[];
-  mainChampion: DbInventoryChampion;
+  mainChampion: DbInventoryMainChampion;
 }
 
 export type DbInventoryDocument = HydratedDocument<DbInventory>;

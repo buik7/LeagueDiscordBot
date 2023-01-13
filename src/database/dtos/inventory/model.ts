@@ -12,16 +12,21 @@ const InventoryChampionType = {
     type: String,
   },
   stats: {
-    armor: { type: Number, default: 0 },
-    damage: { type: Number, default: 0 },
-    hp: { type: Number, default: 0 },
-    magicResist: { type: Number, default: 0 },
+    armor: { type: Number },
+    damage: { type: Number },
+    hp: { type: Number },
+    magicResist: { type: Number },
   },
   ability: {
     name: String,
     desc: String,
     icon: String,
   },
+};
+
+const MainChampionType = {
+  ...InventoryChampionType,
+  star: Number,
 };
 
 const InventorySchema = new mongoose.Schema<DbInventory>({
@@ -31,7 +36,7 @@ const InventorySchema = new mongoose.Schema<DbInventory>({
       count: Number,
     },
   ],
-  mainChampion: InventoryChampionType,
+  mainChampion: MainChampionType,
 });
 
 const Inventory = mongoose.model<DbInventory>("Inventory", InventorySchema);

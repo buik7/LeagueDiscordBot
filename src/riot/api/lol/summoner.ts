@@ -4,7 +4,7 @@ import { lolEndpoints } from "../endpoints";
 import { BaseApiLol } from "./base.lol";
 
 export class SummonerApi extends BaseApiLol {
-  public async getByName(summonerName: string, region: Regions) {
+  public async getByName(region: Regions, summonerName: string) {
     const params = { summonerName };
     return this.request<SummonerDTO>(
       region,
@@ -13,7 +13,7 @@ export class SummonerApi extends BaseApiLol {
     );
   }
 
-  public async getByPUUID(encryptedPUUID: string, region: Regions) {
+  public async getByPUUID(region: Regions, encryptedPUUID: string) {
     const params = { encryptedPUUID };
     return this.request<SummonerDTO>(
       region,
@@ -22,7 +22,7 @@ export class SummonerApi extends BaseApiLol {
     );
   }
 
-  public async getById(encryptedSummonerId: string, region: Regions) {
+  public async getById(region: Regions, encryptedSummonerId: string) {
     const params = { encryptedSummonerId };
     return this.request<SummonerDTO>(
       region,
@@ -31,7 +31,7 @@ export class SummonerApi extends BaseApiLol {
     );
   }
 
-  public getProfileIconURL(profileIconId: string): string {
+  public static getProfileIconURL(profileIconId: number): string {
     return `https://raw.communitydragon.org/pbe/plugins/rcp-be-lol-game-data/global/default/v1/profile-icons/${profileIconId}.jpg`;
   }
 }

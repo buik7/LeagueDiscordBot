@@ -54,3 +54,26 @@ export function regionToRegionGroup(region: Regions): RegionGroups {
   }
   throw new Error(`Unexpected region: ${region}`);
 }
+
+interface IRegionProps {
+  [key: string]: string;
+}
+
+export const regionProps: IRegionProps = {
+  [Regions.VIETNAM]: "Vietnam",
+  [Regions.SINGAPORE]: "Singapore",
+  [Regions.THAILAND]: "Thailand",
+  [Regions.TAIWAN]: "Taiwan",
+  [Regions.PHILIPPINES]: "Phillipines",
+  [Regions.BRAZIL]: "Brazil",
+  [Regions.EU_EAST]: "European East",
+  [Regions.EU_WEST]: "European West",
+  [Regions.KOREA]: "Korea",
+  [Regions.LAT_NORTH]: "Latin North",
+  [Regions.LAT_SOUTH]: "Latin South",
+  [Regions.AMERICA_NORTH]: "North America",
+  [Regions.OCEANIA]: "Oceania",
+  [Regions.TURKEY]: "Turkey",
+  [Regions.RUSSIA]: "Russia",
+  [Regions.JAPAN]: "Japan",
+};

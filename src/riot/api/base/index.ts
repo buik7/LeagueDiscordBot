@@ -53,6 +53,6 @@ export class BaseApi<Region extends string> {
       params: queryParams,
     };
 
-    return axios(options);
+    return (await axios(options)).data;
   }
 }
