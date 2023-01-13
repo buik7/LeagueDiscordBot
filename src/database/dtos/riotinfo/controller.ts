@@ -23,3 +23,13 @@ export const findRiotInfoById = async (
     console.error(error);
   }
 };
+
+export const deleteRiotInfoById = async (
+  _id: Types.ObjectId
+): Promise<DbRiotInfoDocument | undefined> => {
+  try {
+    return (await RiotInfo.findByIdAndDelete(_id)) || undefined;
+  } catch (error) {
+    console.error(error);
+  }
+};

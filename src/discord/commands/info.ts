@@ -1,14 +1,17 @@
 import { EmbedBuilder } from "@discordjs/builders";
 import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
 import { findGameById } from "../../database/dtos/game/controller";
+import { findRiotInfoById } from "../../database/dtos/riotinfo/controller";
 import { findDbUserById } from "../../database/dtos/user/controller";
 import DiscordCommand from "../types/Command";
 import { msToTime } from "../utils/date";
 
 class GameInfoCommand extends DiscordCommand {
   data = new SlashCommandBuilder()
-    .setName("gameinfo")
-    .setDescription("View your account's balance, points and daily cooldown");
+    .setName("info")
+    .setDescription(
+      "View your account's balance, points,daily cooldown and linked League account"
+    );
 
   async execute(interaction: ChatInputCommandInteraction) {
     const _id = {
@@ -38,6 +41,15 @@ class GameInfoCommand extends DiscordCommand {
       dailyCD = `${h} hours, ${m} minutes and ${s} seconds`;
     }
 
+    let linkedLeagueAccountDescription = "None";
+
+    if (user.riotInfoId) {
+      const userRiotInfo = await findRiotInfoById(user.riotInfoId);
+      if (userRiotInfo) {
+        linkedLeagueAccountDescription = `${userRiotInfo.summonerName} (${userRiotInfo.region})`;
+      }
+    }
+
     const embed = new EmbedBuilder()
       .setTitle(`${interaction.user.username}'s profile`)
       .setColor(0x1abc9c)
@@ -55,9 +67,12 @@ class GameInfoCommand extends DiscordCommand {
         {
           name: "Daily cooldown",
           value: dailyCD,
+        },
+        {
+          name: "Linked League account",
+          value: linkedLeagueAccountDescription,
         }
       );
-
     await interaction.reply({ embeds: [embed] });
   }
 

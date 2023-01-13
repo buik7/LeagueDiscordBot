@@ -67,7 +67,7 @@ export class ChampionApi extends BaseApiLol {
     );
   }
 
-  public getMasteryDiscordIcon(championLevel: number): string {
+  public static getMasteryDiscordIcon(championLevel: number): string {
     switch (championLevel) {
       case 1:
         return "<:mastery1:1062478728829083689>";
